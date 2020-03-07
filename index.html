@@ -9,5 +9,34 @@
 
     <h1>Vue Exercise 1</h1>
     
+    <div id="app">
+        <p>Vue js is pretty cool - {{name}} | {{age}}</p>
+        <p>Age: {{age * 3}}</p>
+        <hr>
+        <p>{{randomNum()}}</p>
+        <hr>
+        <img v-bind:src="link" width="100" alt="">
+        <hr>
+        <input type="text" v-bind:value="name">
+        <p>{{name}}</p>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            name: 'Keshav Singh',
+            age: 32,
+            link: 'https://vuejs.org/images/logo.png'
+        },
+        methods: {
+            randomNum: function() {
+                return Math.random()
+            }
+        }
+    })
+    </script>
 </body>
 </html>
