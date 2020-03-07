@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue Basic Exercise 1</title>
+    <link rel="stylesheet" href="./sass/style.css">
 </head>
 <body>
-
-    <h1>Vue Exercise 1</h1>
-    
     <div id="app">
-        <p>Vue js is pretty cool - {{name}} | {{age}}</p>
-        <p>Age: {{age * 3}}</p>
+        <p>{{randomNum()}} | {{name}} | {{age}} | Age: {{age * 3}}</p>
         <hr>
-        <p>{{randomNum()}}</p>
+        <p><input type="text" :value="name"> <img :src="link" width="50" alt=""></p>
         <hr>
-        <img v-bind:src="link" width="100" alt="">
+        <button @click="counter++">Increase</button>
+        <button @click="counter--">Decrease</button>
+        <p>Counter: {{counter}} | {{output}}</p>
         <hr>
-        <input type="text" v-bind:value="name">
-        <p>{{name}}</p>
+        <p>Current Value: {{value}} | {{result}}</p>
+        <button @click="value += 5">Add 5</button>
+        <button @click="value += 1">Add 1</button>
+        <hr>
+        <div class="demo"
+        @click='attachColor = !attachColor'
+        :class="{red : attachColor}"></div>
+        <div class="demo" :class="{blue : attachColor}"></div>
+        <div class="demo" v-bind:class="{green : attachColor}"></div>
     </div>
 
 
@@ -29,7 +35,28 @@
         data: {
             name: 'Keshav Singh',
             age: 32,
-            link: 'https://vuejs.org/images/logo.png'
+            link: 'https://vuejs.org/images/logo.png',
+            counter: 0,
+            value: 0,
+            attachColor: false
+        },
+        computed: {
+            output: function(){
+                return this.counter >= 5 ? 'Greater 5' : 'Smaller than 5' 
+            },
+            result: function(){
+                return this.value == 10 ? "Done" : "Not done";
+            }
+        },
+        watch: {
+            result: function(){
+                let vm = this;
+                console.log(vm);
+                
+                setTimeout(function(){
+                    vm.value = 0;
+                },2000)
+            }
         },
         methods: {
             randomNum: function() {
